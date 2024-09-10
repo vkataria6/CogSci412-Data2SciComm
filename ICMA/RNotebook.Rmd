@@ -1,0 +1,13 @@
+---
+title: "R Notebook"
+output: html_notebook
+author: Vidushi Kataria
+date: "`r Sys.Date()`"
+---
+# ICMA Sept 9 2024
+
+```{r}
+plot(cars)
+```
+
+This plot states that the longer the distance of the car, the higher the speed is used.
