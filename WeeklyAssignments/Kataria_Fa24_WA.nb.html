@@ -1755,31 +1755,161 @@ display: none;
 
 
 <!-- rnb-text-begin -->
-<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-Notebook. When you execute code within the notebook, the results appear
-beneath the code.</p>
-<p>Try executing this chunk by clicking the <em>Run</em> button within
-the chunk or by placing your cursor inside it and pressing
-<em>Cmd+Shift+Enter</em>.</p>
+<div id="initial-heading" class="section level1">
+<h1>Initial Heading</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdChjYXJzKVxuYGBgIn0= -->
-<pre class="r"><code>plot(cars)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zdGFsbC5wYWNrYWdlcyhcInRpZHl2ZXJzZVwiKVxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)
+library(tidyverse)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the
-toolbar or by pressing <em>Cmd+Option+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and
-output will be saved alongside it (click the <em>Preview</em> button or
-press <em>Cmd+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the
-editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not
-run any R code chunks. Instead, the output of the chunk when it was last
-run in the editor is displayed.</p>
+</div>
+<div id="week-1" class="section level1">
+<h1>Week 1</h1>
+<p>Due to my previous programming experience and coursework using R, I
+knew to use install.packages(““) and library() to load the tidyverse
+package.</p>
+<p>I did refer to this website, as it gave me a concise description
+between each function within tidyverse: <a href="https://www.tidyverse.org/packages/" class="uri">https://www.tidyverse.org/packages/</a></p>
+<p>I checked that it was working by using the command and return buttons
+on my keyboard to run the code. The terminal is able to tell me if the
+code successfully ran or had errors.</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVscCgpXG5gYGAifQ== -->
+<pre class="r"><code>help()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>help {utils} R Documentation Documentation Description help is the
+primary interface to the help systems.</p>
+<p>Usage help(topic, package = NULL, lib.loc = NULL, verbose =
+getOption(“verbose”), try.all.packages =
+getOption(“help.try.all.packages”), help_type = getOption(“help_type”))
+Arguments topic<br />
+usually, a name or character string specifying the topic for which help
+is sought. A character string (enclosed in explicit single or double
+quotes) is always taken as naming a topic.</p>
+<p>If the value of topic is a length-one character vector the topic is
+taken to be the value of the only element. Otherwise topic must be a
+name or a reserved word (if syntactically valid) or character
+string.</p>
+<p>See ‘Details’ for what happens if this is omitted.</p>
+<p>package a name or character vector giving the packages to look into
+for documentation, or NULL. By default, all packages whose namespaces
+are loaded are used. To avoid a name being deparsed use e.g. (pkg_ref)
+(see the examples).</p>
+<p>lib.loc a character vector of directory names of R libraries, or
+NULL. The default value of NULL corresponds to all libraries currently
+known. If the default is used, the loaded packages are searched before
+the libraries. This is not used for HTML help (see ‘Details’).</p>
+<p>verbose logical; if TRUE, the file name is reported.</p>
+<p>try.all.packages<br />
+logical; see Note.</p>
+<p>help_type<br />
+character string: the type of help required. Possible values are “text”,
+“html” and “pdf”. Case is ignored, and partial matching is allowed.</p>
+<p>Details The following types of help are available:</p>
+<p>Plain text help</p>
+<p>HTML help pages with hyperlinks to other topics, shown in a browser
+by browseURL. (On Unix-alikes, where possible an existing browser window
+is re-used: the macOS GUI uses its own browser window.)</p>
+<p>If for some reason HTML help is unavailable (see startDynamicHelp),
+plain text help will be used instead.</p>
+<p>For help only, typeset as PDF – see the section on ‘Offline
+help’.</p>
+<p>On Unix-alikes: The ‘factory-fresh’ default is text help except from
+the macOS GUI, which uses HTML help displayed in its own browser
+window.</p>
+<p>On Windows: The default for the type of help is selected when R is
+installed – the ‘factory-fresh’ default is HTML help.</p>
+<p>The rendering of text help will use directional quotes in suitable
+locales (UTF-8 and single-byte Windows locales): sometimes the fonts
+used do not support these quotes so this can be turned off by setting
+options(useFancyQuotes = FALSE).</p>
+<p>topic is not optional: if it is omitted R will give</p>
+<p>If a package is specified, (text or, in interactive use only, HTML)
+information on the package, including hints/links to suitable help
+topics.</p>
+<p>If lib.loc only is specified, a (text) list of available
+packages.</p>
+<p>Help on help itself if none of the first three arguments is
+specified.</p>
+<p>Some topics need to be quoted (by backticks) or given as a character
+string. These include those which cannot syntactically appear on their
+own such as unary and binary operators, function and control-flow
+reserved words (including if, else for, in, repeat, while, break and
+next). The other reserved words can be used as if they were names, for
+example TRUE, NA and Inf.</p>
+<p>If multiple help files matching topic are found, in interactive use a
+menu is presented for the user to choose one: in batch use the first on
+the search path is used. (For HTML help the menu will be an HTML page,
+otherwise a graphical menu if possible if getOption(“menu.graphics”) is
+true, the default.)</p>
+<p>Note that HTML help does not make use of lib.loc: it will always look
+first in the loaded packages and then along .libPaths().</p>
+<p>Offline help Typeset documentation is produced by running the LaTeX
+version of the help page through pdflatex: this will produce a PDF
+file.</p>
+<p>The appearance of the output can be customized through a file
+‘Rhelp.cfg’ somewhere in your LaTeX search path: this will be input as a
+LaTeX style file after Rd.sty. Some environment variables are consulted,
+notably R_PAPERSIZE (via getOption(“papersize”)) and R_RD4PDF (see
+‘Making manuals’ in the ‘R Installation and Administration’ manual).</p>
+<p>If there is a function offline_help_helper in the workspace or
+further down the search path it is used to do the typesetting, otherwise
+the function of that name in the utils namespace (to which the first
+paragraph applies). It should accept at least two arguments, the name of
+the LaTeX file to be typeset and the type (which is nowadays ignored).
+It accepts a third argument, texinputs, which will give the graphics
+path when the help document contains figures, and will otherwise not be
+supplied.</p>
+<p>Note Unless lib.loc is specified explicitly, the loaded packages are
+searched before those in the specified libraries. This ensures that if a
+library is loaded from a library not in the known library trees, then
+the help from the loaded library is used. If lib.loc is specified
+explicitly, the loaded packages are not searched.</p>
+<p>If this search fails and argument try.all.packages is TRUE and
+neither packages nor lib.loc is specified, then all the packages in the
+known library trees are searched for help on topic and a list of (any)
+packages where help may be found is displayed (with hyperlinks for
+help_type = “html”). NB: searching all packages can be slow, especially
+the first time (caching of files by the OS can expedite subsequent
+searches dramatically).</p>
+<p>References Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988) The
+New S Language. Wadsworth &amp; Brooks/Cole.</p>
+<p>See Also ? for shortcuts to help topics.</p>
+<p>help.search() or ?? for finding help pages on a vague topic;
+help.start() which opens the HTML version of the R help pages; library()
+for listing available packages and the help objects they contain; data()
+for listing available data sets; methods().</p>
+<p>Use prompt() to get a prototype for writing help pages of your own
+package.</p>
+<p>Examples Run examples</p>
+<p>help() help(help) # the same</p>
+<p>help(lapply)</p>
+<p>help(“for”) # or ?“for”, but quotes/backticks are needed</p>
+<p>try({# requires working TeX installation: help(dgamma, help_type =
+“pdf”) ## -&gt; nicely formatted pdf – including math formula – for
+help(dgamma): system2(getOption(“pdfviewer”), “dgamma.pdf”, wait =
+FALSE) })</p>
+<p>help(package = “splines”) # get help even when package is not
+loaded</p>
+<p>topi &lt;- “women” help(topi)</p>
+<p>try(help(“bs”, try.all.packages = FALSE)) # reports not found (an
+error) help(“bs”, try.all.packages = TRUE) # reports can be found # in
+package ‘splines’</p>
+<div id="for-programmatic-use" class="section level2">
+<h2>For programmatic use:</h2>
+<p>topic &lt;- “family”; pkg_ref &lt;- “stats” help((topic),
+(pkg_ref))</p>
+<!-- rnb-text-end -->
+</div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRDJTQzogV2Vla2x5IEFzc2lnbm1lbnRzIgpkYXRlOiAiMjAyNC05LTEwIgphdXRob3I6ICJWaWR1c2hpIEthdGFyaWEiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KClRoaXMgaXMgYW4gW1IgTWFya2Rvd25dKGh0dHA6Ly9ybWFya2Rvd24ucnN0dWRpby5jb20pIE5vdGVib29rLiBXaGVuIHlvdSBleGVjdXRlIGNvZGUgd2l0aGluIHRoZSBub3RlYm9vaywgdGhlIHJlc3VsdHMgYXBwZWFyIGJlbmVhdGggdGhlIGNvZGUuIAoKVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkNtZCtTaGlmdCtFbnRlciouIAoKYGBge3J9CnBsb3QoY2FycykKYGBgCgpBZGQgYSBuZXcgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpJbnNlcnQgQ2h1bmsqIGJ1dHRvbiBvbiB0aGUgdG9vbGJhciBvciBieSBwcmVzc2luZyAqQ21kK09wdGlvbitJKi4KCldoZW4geW91IHNhdmUgdGhlIG5vdGVib29rLCBhbiBIVE1MIGZpbGUgY29udGFpbmluZyB0aGUgY29kZSBhbmQgb3V0cHV0IHdpbGwgYmUgc2F2ZWQgYWxvbmdzaWRlIGl0IChjbGljayB0aGUgKlByZXZpZXcqIGJ1dHRvbiBvciBwcmVzcyAqQ21kK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuIAoKVGhlIHByZXZpZXcgc2hvd3MgeW91IGEgcmVuZGVyZWQgSFRNTCBjb3B5IG9mIHRoZSBjb250ZW50cyBvZiB0aGUgZWRpdG9yLiBDb25zZXF1ZW50bHksIHVubGlrZSAqS25pdCosICpQcmV2aWV3KiBkb2VzIG5vdCBydW4gYW55IFIgY29kZSBjaHVua3MuIEluc3RlYWQsIHRoZSBvdXRwdXQgb2YgdGhlIGNodW5rIHdoZW4gaXQgd2FzIGxhc3QgcnVuIGluIHRoZSBlZGl0b3IgaXMgZGlzcGxheWVkLgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRDJTQzogV2Vla2x5IEFzc2lnbm1lbnRzIgpkYXRlOiAiMjAyNC05LTEwIgphdXRob3I6ICJWaWR1c2hpIEthdGFyaWEiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KIyBJbml0aWFsIEhlYWRpbmcKYGBge3J9Cmluc3RhbGwucGFja2FnZXMoInRpZHl2ZXJzZSIpCmxpYnJhcnkodGlkeXZlcnNlKQpgYGAKIyBXZWVrIDEKRHVlIHRvIG15IHByZXZpb3VzIHByb2dyYW1taW5nIGV4cGVyaWVuY2UgYW5kIGNvdXJzZXdvcmsgdXNpbmcgUiwgSSBrbmV3IHRvIHVzZSBpbnN0YWxsLnBhY2thZ2VzKCIiKSBhbmQgbGlicmFyeSgpIHRvIGxvYWQgdGhlIHRpZHl2ZXJzZSBwYWNrYWdlLgoKSSBkaWQgcmVmZXIgdG8gdGhpcyB3ZWJzaXRlLCBhcyBpdCBnYXZlIG1lIGEgY29uY2lzZSBkZXNjcmlwdGlvbiBiZXR3ZWVuIGVhY2ggZnVuY3Rpb24gd2l0aGluIHRpZHl2ZXJzZTogaHR0cHM6Ly93d3cudGlkeXZlcnNlLm9yZy9wYWNrYWdlcy8gCgpJIGNoZWNrZWQgdGhhdCBpdCB3YXMgd29ya2luZyBieSB1c2luZyB0aGUgY29tbWFuZCBhbmQgcmV0dXJuIGJ1dHRvbnMgb24gbXkga2V5Ym9hcmQgdG8gcnVuIHRoZSBjb2RlLiBUaGUgdGVybWluYWwgaXMgYWJsZSB0byB0ZWxsIG1lIGlmIHRoZSBjb2RlIHN1Y2Nlc3NmdWxseSByYW4gb3IgaGFkIGVycm9ycy4gCgpgYGB7cn0KaGVscCgpCmBgYApoZWxwIHt1dGlsc30JUiBEb2N1bWVudGF0aW9uCkRvY3VtZW50YXRpb24KRGVzY3JpcHRpb24KaGVscCBpcyB0aGUgcHJpbWFyeSBpbnRlcmZhY2UgdG8gdGhlIGhlbHAgc3lzdGVtcy4KClVzYWdlCmhlbHAodG9waWMsIHBhY2thZ2UgPSBOVUxMLCBsaWIubG9jID0gTlVMTCwKICAgICB2ZXJib3NlID0gZ2V0T3B0aW9uKCJ2ZXJib3NlIiksCiAgICAgdHJ5LmFsbC5wYWNrYWdlcyA9IGdldE9wdGlvbigiaGVscC50cnkuYWxsLnBhY2thZ2VzIiksCiAgICAgaGVscF90eXBlID0gZ2V0T3B0aW9uKCJoZWxwX3R5cGUiKSkKQXJndW1lbnRzCnRvcGljCQp1c3VhbGx5LCBhIG5hbWUgb3IgY2hhcmFjdGVyIHN0cmluZyBzcGVjaWZ5aW5nIHRoZSB0b3BpYyBmb3Igd2hpY2ggaGVscCBpcyBzb3VnaHQuIEEgY2hhcmFjdGVyIHN0cmluZyAoZW5jbG9zZWQgaW4gZXhwbGljaXQgc2luZ2xlIG9yIGRvdWJsZSBxdW90ZXMpIGlzIGFsd2F5cyB0YWtlbiBhcyBuYW1pbmcgYSB0b3BpYy4KCklmIHRoZSB2YWx1ZSBvZiB0b3BpYyBpcyBhIGxlbmd0aC1vbmUgY2hhcmFjdGVyIHZlY3RvciB0aGUgdG9waWMgaXMgdGFrZW4gdG8gYmUgdGhlIHZhbHVlIG9mIHRoZSBvbmx5IGVsZW1lbnQuIE90aGVyd2lzZSB0b3BpYyBtdXN0IGJlIGEgbmFtZSBvciBhIHJlc2VydmVkIHdvcmQgKGlmIHN5bnRhY3RpY2FsbHkgdmFsaWQpIG9yIGNoYXJhY3RlciBzdHJpbmcuCgpTZWUg4oCYRGV0YWlsc+KAmSBmb3Igd2hhdCBoYXBwZW5zIGlmIHRoaXMgaXMgb21pdHRlZC4KCnBhY2thZ2UJCmEgbmFtZSBvciBjaGFyYWN0ZXIgdmVjdG9yIGdpdmluZyB0aGUgcGFja2FnZXMgdG8gbG9vayBpbnRvIGZvciBkb2N1bWVudGF0aW9uLCBvciBOVUxMLiBCeSBkZWZhdWx0LCBhbGwgcGFja2FnZXMgd2hvc2UgbmFtZXNwYWNlcyBhcmUgbG9hZGVkIGFyZSB1c2VkLiBUbyBhdm9pZCBhIG5hbWUgYmVpbmcgZGVwYXJzZWQgdXNlIGUuZy4gKHBrZ19yZWYpIChzZWUgdGhlIGV4YW1wbGVzKS4KCmxpYi5sb2MJCmEgY2hhcmFjdGVyIHZlY3RvciBvZiBkaXJlY3RvcnkgbmFtZXMgb2YgUiBsaWJyYXJpZXMsIG9yIE5VTEwuIFRoZSBkZWZhdWx0IHZhbHVlIG9mIE5VTEwgY29ycmVzcG9uZHMgdG8gYWxsIGxpYnJhcmllcyBjdXJyZW50bHkga25vd24uIElmIHRoZSBkZWZhdWx0IGlzIHVzZWQsIHRoZSBsb2FkZWQgcGFja2FnZXMgYXJlIHNlYXJjaGVkIGJlZm9yZSB0aGUgbGlicmFyaWVzLiBUaGlzIGlzIG5vdCB1c2VkIGZvciBIVE1MIGhlbHAgKHNlZSDigJhEZXRhaWxz4oCZKS4KCnZlcmJvc2UJCmxvZ2ljYWw7IGlmIFRSVUUsIHRoZSBmaWxlIG5hbWUgaXMgcmVwb3J0ZWQuCgp0cnkuYWxsLnBhY2thZ2VzCQpsb2dpY2FsOyBzZWUgTm90ZS4KCmhlbHBfdHlwZQkKY2hhcmFjdGVyIHN0cmluZzogdGhlIHR5cGUgb2YgaGVscCByZXF1aXJlZC4gUG9zc2libGUgdmFsdWVzIGFyZSAidGV4dCIsICJodG1sIiBhbmQgInBkZiIuIENhc2UgaXMgaWdub3JlZCwgYW5kIHBhcnRpYWwgbWF0Y2hpbmcgaXMgYWxsb3dlZC4KCkRldGFpbHMKVGhlIGZvbGxvd2luZyB0eXBlcyBvZiBoZWxwIGFyZSBhdmFpbGFibGU6CgpQbGFpbiB0ZXh0IGhlbHAKCkhUTUwgaGVscCBwYWdlcyB3aXRoIGh5cGVybGlua3MgdG8gb3RoZXIgdG9waWNzLCBzaG93biBpbiBhIGJyb3dzZXIgYnkgYnJvd3NlVVJMLgooT24gVW5peC1hbGlrZXMsIHdoZXJlIHBvc3NpYmxlIGFuIGV4aXN0aW5nIGJyb3dzZXIgd2luZG93IGlzIHJlLXVzZWQ6IHRoZSBtYWNPUyBHVUkgdXNlcyBpdHMgb3duIGJyb3dzZXIgd2luZG93LikKCklmIGZvciBzb21lIHJlYXNvbiBIVE1MIGhlbHAgaXMgdW5hdmFpbGFibGUgKHNlZSBzdGFydER5bmFtaWNIZWxwKSwgcGxhaW4gdGV4dCBoZWxwIHdpbGwgYmUgdXNlZCBpbnN0ZWFkLgoKRm9yIGhlbHAgb25seSwgdHlwZXNldCBhcyBQREYg4oCTIHNlZSB0aGUgc2VjdGlvbiBvbiDigJhPZmZsaW5lIGhlbHDigJkuCgpPbiBVbml4LWFsaWtlczoKVGhlIOKAmGZhY3RvcnktZnJlc2jigJkgZGVmYXVsdCBpcyB0ZXh0IGhlbHAgZXhjZXB0IGZyb20gdGhlIG1hY09TIEdVSSwgd2hpY2ggdXNlcyBIVE1MIGhlbHAgZGlzcGxheWVkIGluIGl0cyBvd24gYnJvd3NlciB3aW5kb3cuCgpPbiBXaW5kb3dzOgpUaGUgZGVmYXVsdCBmb3IgdGhlIHR5cGUgb2YgaGVscCBpcyBzZWxlY3RlZCB3aGVuIFIgaXMgaW5zdGFsbGVkIOKAkyB0aGUg4oCYZmFjdG9yeS1mcmVzaOKAmSBkZWZhdWx0IGlzIEhUTUwgaGVscC4KClRoZSByZW5kZXJpbmcgb2YgdGV4dCBoZWxwIHdpbGwgdXNlIGRpcmVjdGlvbmFsIHF1b3RlcyBpbiBzdWl0YWJsZSBsb2NhbGVzIChVVEYtOCBhbmQgc2luZ2xlLWJ5dGUgV2luZG93cyBsb2NhbGVzKTogc29tZXRpbWVzIHRoZSBmb250cyB1c2VkIGRvIG5vdCBzdXBwb3J0IHRoZXNlIHF1b3RlcyBzbyB0aGlzIGNhbiBiZSB0dXJuZWQgb2ZmIGJ5IHNldHRpbmcgb3B0aW9ucyh1c2VGYW5jeVF1b3RlcyA9IEZBTFNFKS4KCnRvcGljIGlzIG5vdCBvcHRpb25hbDogaWYgaXQgaXMgb21pdHRlZCBSIHdpbGwgZ2l2ZQoKSWYgYSBwYWNrYWdlIGlzIHNwZWNpZmllZCwgKHRleHQgb3IsIGluIGludGVyYWN0aXZlIHVzZSBvbmx5LCBIVE1MKSBpbmZvcm1hdGlvbiBvbiB0aGUgcGFja2FnZSwgaW5jbHVkaW5nIGhpbnRzL2xpbmtzIHRvIHN1aXRhYmxlIGhlbHAgdG9waWNzLgoKSWYgbGliLmxvYyBvbmx5IGlzIHNwZWNpZmllZCwgYSAodGV4dCkgbGlzdCBvZiBhdmFpbGFibGUgcGFja2FnZXMuCgpIZWxwIG9uIGhlbHAgaXRzZWxmIGlmIG5vbmUgb2YgdGhlIGZpcnN0IHRocmVlIGFyZ3VtZW50cyBpcyBzcGVjaWZpZWQuCgpTb21lIHRvcGljcyBuZWVkIHRvIGJlIHF1b3RlZCAoYnkgYmFja3RpY2tzKSBvciBnaXZlbiBhcyBhIGNoYXJhY3RlciBzdHJpbmcuIFRoZXNlIGluY2x1ZGUgdGhvc2Ugd2hpY2ggY2Fubm90IHN5bnRhY3RpY2FsbHkgYXBwZWFyIG9uIHRoZWlyIG93biBzdWNoIGFzIHVuYXJ5IGFuZCBiaW5hcnkgb3BlcmF0b3JzLCBmdW5jdGlvbiBhbmQgY29udHJvbC1mbG93IHJlc2VydmVkIHdvcmRzIChpbmNsdWRpbmcgaWYsIGVsc2UgZm9yLCBpbiwgcmVwZWF0LCB3aGlsZSwgYnJlYWsgYW5kIG5leHQpLiBUaGUgb3RoZXIgcmVzZXJ2ZWQgd29yZHMgY2FuIGJlIHVzZWQgYXMgaWYgdGhleSB3ZXJlIG5hbWVzLCBmb3IgZXhhbXBsZSBUUlVFLCBOQSBhbmQgSW5mLgoKSWYgbXVsdGlwbGUgaGVscCBmaWxlcyBtYXRjaGluZyB0b3BpYyBhcmUgZm91bmQsIGluIGludGVyYWN0aXZlIHVzZSBhIG1lbnUgaXMgcHJlc2VudGVkIGZvciB0aGUgdXNlciB0byBjaG9vc2Ugb25lOiBpbiBiYXRjaCB1c2UgdGhlIGZpcnN0IG9uIHRoZSBzZWFyY2ggcGF0aCBpcyB1c2VkLiAoRm9yIEhUTUwgaGVscCB0aGUgbWVudSB3aWxsIGJlIGFuIEhUTUwgcGFnZSwgb3RoZXJ3aXNlIGEgZ3JhcGhpY2FsIG1lbnUgaWYgcG9zc2libGUgaWYgZ2V0T3B0aW9uKCJtZW51LmdyYXBoaWNzIikgaXMgdHJ1ZSwgdGhlIGRlZmF1bHQuKQoKTm90ZSB0aGF0IEhUTUwgaGVscCBkb2VzIG5vdCBtYWtlIHVzZSBvZiBsaWIubG9jOiBpdCB3aWxsIGFsd2F5cyBsb29rIGZpcnN0IGluIHRoZSBsb2FkZWQgcGFja2FnZXMgYW5kIHRoZW4gYWxvbmcgLmxpYlBhdGhzKCkuCgpPZmZsaW5lIGhlbHAKVHlwZXNldCBkb2N1bWVudGF0aW9uIGlzIHByb2R1Y2VkIGJ5IHJ1bm5pbmcgdGhlIExhVGVYIHZlcnNpb24gb2YgdGhlIGhlbHAgcGFnZSB0aHJvdWdoIHBkZmxhdGV4OiB0aGlzIHdpbGwgcHJvZHVjZSBhIFBERiBmaWxlLgoKVGhlIGFwcGVhcmFuY2Ugb2YgdGhlIG91dHB1dCBjYW4gYmUgY3VzdG9taXplZCB0aHJvdWdoIGEgZmlsZSDigJhSaGVscC5jZmfigJkgc29tZXdoZXJlIGluIHlvdXIgTGFUZVggc2VhcmNoIHBhdGg6IHRoaXMgd2lsbCBiZSBpbnB1dCBhcyBhIExhVGVYIHN0eWxlIGZpbGUgYWZ0ZXIgUmQuc3R5LiBTb21lIGVudmlyb25tZW50IHZhcmlhYmxlcyBhcmUgY29uc3VsdGVkLCBub3RhYmx5IFJfUEFQRVJTSVpFICh2aWEgZ2V0T3B0aW9uKCJwYXBlcnNpemUiKSkgYW5kIFJfUkQ0UERGIChzZWUg4oCYTWFraW5nIG1hbnVhbHPigJkgaW4gdGhlIOKAmFIgSW5zdGFsbGF0aW9uIGFuZCBBZG1pbmlzdHJhdGlvbuKAmSBtYW51YWwpLgoKSWYgdGhlcmUgaXMgYSBmdW5jdGlvbiBvZmZsaW5lX2hlbHBfaGVscGVyIGluIHRoZSB3b3Jrc3BhY2Ugb3IgZnVydGhlciBkb3duIHRoZSBzZWFyY2ggcGF0aCBpdCBpcyB1c2VkIHRvIGRvIHRoZSB0eXBlc2V0dGluZywgb3RoZXJ3aXNlIHRoZSBmdW5jdGlvbiBvZiB0aGF0IG5hbWUgaW4gdGhlIHV0aWxzIG5hbWVzcGFjZSAodG8gd2hpY2ggdGhlIGZpcnN0IHBhcmFncmFwaCBhcHBsaWVzKS4gSXQgc2hvdWxkIGFjY2VwdCBhdCBsZWFzdCB0d28gYXJndW1lbnRzLCB0aGUgbmFtZSBvZiB0aGUgTGFUZVggZmlsZSB0byBiZSB0eXBlc2V0IGFuZCB0aGUgdHlwZSAod2hpY2ggaXMgbm93YWRheXMgaWdub3JlZCkuIEl0IGFjY2VwdHMgYSB0aGlyZCBhcmd1bWVudCwgdGV4aW5wdXRzLCB3aGljaCB3aWxsIGdpdmUgdGhlIGdyYXBoaWNzIHBhdGggd2hlbiB0aGUgaGVscCBkb2N1bWVudCBjb250YWlucyBmaWd1cmVzLCBhbmQgd2lsbCBvdGhlcndpc2Ugbm90IGJlIHN1cHBsaWVkLgoKTm90ZQpVbmxlc3MgbGliLmxvYyBpcyBzcGVjaWZpZWQgZXhwbGljaXRseSwgdGhlIGxvYWRlZCBwYWNrYWdlcyBhcmUgc2VhcmNoZWQgYmVmb3JlIHRob3NlIGluIHRoZSBzcGVjaWZpZWQgbGlicmFyaWVzLiBUaGlzIGVuc3VyZXMgdGhhdCBpZiBhIGxpYnJhcnkgaXMgbG9hZGVkIGZyb20gYSBsaWJyYXJ5IG5vdCBpbiB0aGUga25vd24gbGlicmFyeSB0cmVlcywgdGhlbiB0aGUgaGVscCBmcm9tIHRoZSBsb2FkZWQgbGlicmFyeSBpcyB1c2VkLiBJZiBsaWIubG9jIGlzIHNwZWNpZmllZCBleHBsaWNpdGx5LCB0aGUgbG9hZGVkIHBhY2thZ2VzIGFyZSBub3Qgc2VhcmNoZWQuCgpJZiB0aGlzIHNlYXJjaCBmYWlscyBhbmQgYXJndW1lbnQgdHJ5LmFsbC5wYWNrYWdlcyBpcyBUUlVFIGFuZCBuZWl0aGVyIHBhY2thZ2VzIG5vciBsaWIubG9jIGlzIHNwZWNpZmllZCwgdGhlbiBhbGwgdGhlIHBhY2thZ2VzIGluIHRoZSBrbm93biBsaWJyYXJ5IHRyZWVzIGFyZSBzZWFyY2hlZCBmb3IgaGVscCBvbiB0b3BpYyBhbmQgYSBsaXN0IG9mIChhbnkpIHBhY2thZ2VzIHdoZXJlIGhlbHAgbWF5IGJlIGZvdW5kIGlzIGRpc3BsYXllZCAod2l0aCBoeXBlcmxpbmtzIGZvciBoZWxwX3R5cGUgPSAiaHRtbCIpLiBOQjogc2VhcmNoaW5nIGFsbCBwYWNrYWdlcyBjYW4gYmUgc2xvdywgZXNwZWNpYWxseSB0aGUgZmlyc3QgdGltZSAoY2FjaGluZyBvZiBmaWxlcyBieSB0aGUgT1MgY2FuIGV4cGVkaXRlIHN1YnNlcXVlbnQgc2VhcmNoZXMgZHJhbWF0aWNhbGx5KS4KClJlZmVyZW5jZXMKQmVja2VyLCBSLiBBLiwgQ2hhbWJlcnMsIEouIE0uIGFuZCBXaWxrcywgQS4gUi4gKDE5ODgpIFRoZSBOZXcgUyBMYW5ndWFnZS4gV2Fkc3dvcnRoICYgQnJvb2tzL0NvbGUuCgpTZWUgQWxzbwo/IGZvciBzaG9ydGN1dHMgdG8gaGVscCB0b3BpY3MuCgpoZWxwLnNlYXJjaCgpIG9yID8/IGZvciBmaW5kaW5nIGhlbHAgcGFnZXMgb24gYSB2YWd1ZSB0b3BpYzsgaGVscC5zdGFydCgpIHdoaWNoIG9wZW5zIHRoZSBIVE1MIHZlcnNpb24gb2YgdGhlIFIgaGVscCBwYWdlczsgbGlicmFyeSgpIGZvciBsaXN0aW5nIGF2YWlsYWJsZSBwYWNrYWdlcyBhbmQgdGhlIGhlbHAgb2JqZWN0cyB0aGV5IGNvbnRhaW47IGRhdGEoKSBmb3IgbGlzdGluZyBhdmFpbGFibGUgZGF0YSBzZXRzOyBtZXRob2RzKCkuCgpVc2UgcHJvbXB0KCkgdG8gZ2V0IGEgcHJvdG90eXBlIGZvciB3cml0aW5nIGhlbHAgcGFnZXMgb2YgeW91ciBvd24gcGFja2FnZS4KCkV4YW1wbGVzClJ1biBleGFtcGxlcwoKaGVscCgpCmhlbHAoaGVscCkgICAgICAgICAgICAgICMgdGhlIHNhbWUKCmhlbHAobGFwcGx5KQoKaGVscCgiZm9yIikgICAgICAgICAgICAgIyBvciA/ImZvciIsIGJ1dCBxdW90ZXMvYmFja3RpY2tzIGFyZSBuZWVkZWQKCnRyeSh7IyByZXF1aXJlcyB3b3JraW5nIFRlWCBpbnN0YWxsYXRpb246CiBoZWxwKGRnYW1tYSwgaGVscF90eXBlID0gInBkZiIpCiAjIyAtPiBuaWNlbHkgZm9ybWF0dGVkIHBkZiAtLSBpbmNsdWRpbmcgbWF0aCBmb3JtdWxhIC0tIGZvciBoZWxwKGRnYW1tYSk6CiBzeXN0ZW0yKGdldE9wdGlvbigicGRmdmlld2VyIiksICJkZ2FtbWEucGRmIiwgd2FpdCA9IEZBTFNFKQp9KQoKaGVscChwYWNrYWdlID0gInNwbGluZXMiKSAjIGdldCBoZWxwIGV2ZW4gd2hlbiBwYWNrYWdlIGlzIG5vdCBsb2FkZWQKCnRvcGkgPC0gIndvbWVuIgpoZWxwKHRvcGkpCgp0cnkoaGVscCgiYnMiLCB0cnkuYWxsLnBhY2thZ2VzID0gRkFMU0UpKSAjIHJlcG9ydHMgbm90IGZvdW5kIChhbiBlcnJvcikKaGVscCgiYnMiLCB0cnkuYWxsLnBhY2thZ2VzID0gVFJVRSkgICAgICAgIyByZXBvcnRzIGNhbiBiZSBmb3VuZAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIGluIHBhY2thZ2UgJ3NwbGluZXMnCgojIyBGb3IgcHJvZ3JhbW1hdGljIHVzZToKdG9waWMgPC0gImZhbWlseSI7IHBrZ19yZWYgPC0gInN0YXRzIgpoZWxwKCh0b3BpYyksIChwa2dfcmVmKSkKCg==</div>
 
 
 
