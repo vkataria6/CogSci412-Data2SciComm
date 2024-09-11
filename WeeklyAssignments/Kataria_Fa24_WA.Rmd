@@ -2,7 +2,6 @@
 title: "D2SC: Weekly Assignments"
 date: "2024-9-10"
 author: "Vidushi Kataria"
-output: html_notebook
 ---
 # Initial Heading
 ```{r}
