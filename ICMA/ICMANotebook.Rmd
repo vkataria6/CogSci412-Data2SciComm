@@ -29,7 +29,6 @@ x <- 2+2
 myVector <- c(2,3,4)
 ```
 
-
 ```{r}
 mean(my_vector)
 ```
@@ -40,4 +39,71 @@ mean(my_vector)
 help(sd)
 sd(1:2) ^ 2
 ```
+
+# ICMA Sept 16 2024
+
+```{r}
+library(tidyverse)
+```
+
+Wide format is NOT tidy. All tidy data will be in long form.
+
+The pipe (%>%) is an operator that takes the outcome of the thing before it and passes it, as an argument, to the next function.
+
+For example...
+```{r}
+billboard %>% # take this dataset AND THEN...
+  select(artist, date.entered) %>% # select these two columns AND THEN...
+  filter(artist < "a") %>% # filter the dataset based on this value
+  head(n=3) # only show first 3 rows 
+```
+
+ICMA: the pipe
+```{r}
+# not using pipe
+my_numbers <-c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) 
+mean(my_numbers)
+
+# output appears in source window and in the console
+```
+```{r}
+# using pipe
+mean_my_numbers <- my_numbers %>%
+  mean()
+
+# output appears in the environment window under values
+# output is the same-- 5.5
+```
+
+Tidyverse core packages include:
+readr: reading & writing data
+tidyr: tidying data
+dplyr and purr: manipulating and transforming data
+lubridate: working with dates
+stringr: working with strings 
+forcats: working with factors
+ggplot2: the "grammar of graphics" for creating data visualizations 
+
+```{r}
+getwd() #finding my working directory 
+```
+
+haven for SPSS, Stata, SAS
+readxl for Microsoft Excel files
+readr for csv, tsv, txt, and other types of deliminated files
+
+```{r}
+?mtcars
+```
+
+```{r}
+write_csv(mtcars, "mtcars_fromR.csv")
+
+read_csv("mtcars_fromR.csv")
+```
+
+```{r}
+glimpse("mtcars_fromR.csv")
+```
+- The number of rows and columns are 32 x 11. This is what I expected after using the glimpse function, which told me the data frame has 32 observations on 11 (numeric) variables.
 
