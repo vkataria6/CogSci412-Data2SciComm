@@ -103,7 +103,7 @@ read_csv("mtcars_fromR.csv")
 ```
 
 ```{r}
-glimpse("mtcars_fromR.csv")
+glimpse(mtcars)
 ```
 - The number of rows and columns are 32 x 11. This is what I expected after using the glimpse function, which told me the data frame has 32 observations on 11 (numeric) variables.
 
