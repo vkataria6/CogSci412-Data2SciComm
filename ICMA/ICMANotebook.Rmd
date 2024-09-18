@@ -107,3 +107,25 @@ glimpse("mtcars_fromR.csv")
 ```
 - The number of rows and columns are 32 x 11. This is what I expected after using the glimpse function, which told me the data frame has 32 observations on 11 (numeric) variables.
 
+Checking column names and class types:
+```{r}
+colnames(mtcars)
+
+sapply(mtcars, class)
+```
+The column names are as I expect. The help window explaining the format of the data frame explains each column. I do not need to change the labels as it accurately conveys each variable. 
+The classes for each column are numeric, which is accurate in regards to the dataset and what it is trying to convey.
+
+There are now empty rows and columns just by scanning through the dataset, so it is already clean. 
+
+```{r}
+library(readr)
+mtcars <- read_csv("mtcars_fromR.csv", na = (c("", "NA", "-999")))
+```
+```{r}
+mtcars %>%
+  group_by(cyl) %>%
+  count()
+```
+
+
