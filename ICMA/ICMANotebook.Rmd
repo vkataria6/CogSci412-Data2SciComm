@@ -26,7 +26,7 @@ x <- 2+2
 ```
 
 ```{r}
-myVector <- c(2,3,4)
+my_vector <- c(2,3,4)
 ```
 
 ```{r}
@@ -130,4 +130,36 @@ mtcars %>%
 
 # ICMA Sept 18th 2024
 
+```{r}
+?ChickWeight
+glimpse(ChickWeight)
+```
+
+```{r}
+chick_clean <- ChickWeight %>%
+  select(chick_id = Chick,
+         diet = Diet,
+         age_days = Time,
+         weight_gm = weight)
+```
+
+mutate() also has it's own if/then type capability that can be useful: case_when()
+```{r}
+chick_clean %>%
+  mutate(session = case_when(age_days == 0 ~ "birth",
+                             age_days == 20 ~ "last1",
+                             age_days ==21 ~ "last2",
+                             TRUE          ~as.character(age_days)))
+```
+
+
+```{r}
+chick_clean %>%
+  filter(age_days == 20) %>%
+  mutate(weight_lbs = weight_gm/453.6) %>%
+  group_by(diet) %>%
+  summarise(N = n(), 
+            mean_wgt_gm = mean(weight_gm),
+            mean_wgt_lbs = mean(weight_lbs))
+```
 
