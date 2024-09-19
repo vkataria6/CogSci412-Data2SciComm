@@ -73,4 +73,4 @@ trial_counts <- match_trials %>%
 trial_counts == 1
 ```
 
-
+## 2c: Every unique qualtrics_id has data from the same number of trials, as I counted the number of trials per person, extracted the column, and checked if all values are the same.
