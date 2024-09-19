@@ -42,3 +42,35 @@ Report bugs at https://github.com/tidyverse/tidyverse/issues
 --------------------------------------------------------------------------------
 # Assignment 2
 
+```{r Q1}
+library(dplyr)
+getwd()
+match_trials <- read.csv("/Users/vidushikataria/Downloads/CogSci412-Data2SciComm/WeeklyAssignments/tidy_data/MFIndD_analogy.csv")
+```
+
+The qualtrics_id column contains the unique identifier for each participant. 
+
+```{r Q2a}
+glimpse(match_trials)
+```
+## 2a: There are 792 rows and 6 columns. I got this information from the output of using the function glimpse()
+
+```{r}
+people <- match_trials %>%
+  distinct(qualtrics_id) %>%
+  nrow()
+people
+```
+
+## 2b: There are 99 unique people in the dataset, as found by counting distinct qualtrics_id values.
+
+```{r 2c}
+trial_counts <- match_trials %>%
+  count(qualtrics_id) %>%
+  pull(n) %>%
+  n_distinct()
+
+trial_counts == 1
+```
+
+
