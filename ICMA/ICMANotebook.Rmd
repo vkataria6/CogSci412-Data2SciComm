@@ -163,3 +163,42 @@ chick_clean %>%
             mean_wgt_lbs = mean(weight_lbs))
 ```
 
+
+# ICMA Sept 23 2024
+Five main types of functions in tidyr:
+- Pivoting: Converts between long and wide forms
+- Splitting and combining: take character columns and split/combine them
+- Missing values: For working with NAs (missing values)
+- Rectangling: Turns deeply nested lists (as from JSON) into tidy tibbles
+- (Un)Nesting: Converts between grouped data and a form where each group becomes a single row containing a nested data frame
+
+```{r}
+head(billboard)
+```
+
+```{r}
+billboard_long <- billboard %>%
+  pivot_longer(wk1:wk76,
+               names_to = "week",
+               values_to = "position",
+               names_prefix = "wk",
+               values_drop_na = TRUE)
+```
+
+```{r}
+# reversing it back to wide format 
+billboard_long %>%
+  pivot_wider(names_from = "week",
+              values_from = "position") 
+```
+
+```{r}
+?pivot_longer
+```
+
+```{r}
+billboard %>%
+  separate(col = date.entered,
+           into = c("year", "month", "day"))
+```
+
