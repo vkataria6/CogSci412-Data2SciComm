@@ -1809,32 +1809,11 @@ Learn more about the ‘tidyverse’ at <a href="https://www.tidyverse.org" clas
 <h1>Assignment 2</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkcGx5cilcbmBgYCJ9 -->
-<pre class="r"><code>library(dplyr)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkcGx5cilcbmdldHdkKClcbm1hdGNoX3RyaWFscyA8LSByZWFkLmNzdihcIi9Vc2Vycy92aWR1c2hpa2F0YXJpYS9Eb3dubG9hZHMvQ29nU2NpNDEyLURhdGEyU2NpQ29tbS9XZWVrbHlBc3NpZ25tZW50cy90aWR5X2RhdGEvTUZJbmREX2FuYWxvZ3kuY3N2XCIpXG5gYGAifQ== -->
+<pre class="r"><code>library(dplyr)
+getwd()
+match_trials &lt;- read.csv(&quot;/Users/vidushikataria/Downloads/CogSci412-Data2SciComm/WeeklyAssignments/tidy_data/MFIndD_analogy.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZXhpc3RzKGNhY2hlS2V5LCB3aGVyZSA9IC5ycy5Xb3JraW5nRGF0YUVudiwgaW5oZXJpdHMgPSBGQUxTRSkgOiBcbiAgaW52YWxpZCBmaXJzdCBhcmd1bWVudFxuIn0= -->
-<pre><code>Error in exists(cacheKey, where = .rs.WorkingDataEnv, inherits = FALSE) : 
-  invalid first argument</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0d2QoKVxuYGBgIn0= -->
-<pre class="r"><code>getwd()</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiL1VzZXJzL3ZpZHVzaGlrYXRhcmlhL0Rvd25sb2Fkcy9Db2dTY2k0MTItRGF0YTJTY2lDb21tL1dlZWtseUFzc2lnbm1lbnRzXCJcbiJ9 -->
-<pre><code>[1] &quot;/Users/vidushikataria/Downloads/CogSci412-Data2SciComm/WeeklyAssignments&quot;</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZXhpc3RzKGNhY2hlS2V5LCB3aGVyZSA9IC5ycy5Xb3JraW5nRGF0YUVudiwgaW5oZXJpdHMgPSBGQUxTRSkgOiBcbiAgaW52YWxpZCBmaXJzdCBhcmd1bWVudFxuIn0= -->
-<pre><code>Error in exists(cacheKey, where = .rs.WorkingDataEnv, inherits = FALSE) : 
-  invalid first argument</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWF0Y2hfdHJpYWxzIDwtIHJlYWQuY3N2KFwiL1VzZXJzL3ZpZHVzaGlrYXRhcmlhL0Rvd25sb2Fkcy9Db2dTY2k0MTItRGF0YTJTY2lDb21tL1dlZWtseUFzc2lnbm1lbnRzL3RpZHlfZGF0YS9NRkluZERfYW5hbG9neS5jc3ZcIilcbmBgYCJ9 -->
-<pre class="r"><code>match_trials &lt;- read.csv(&quot;/Users/vidushikataria/Downloads/CogSci412-Data2SciComm/WeeklyAssignments/tidy_data/MFIndD_analogy.csv&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZXhpc3RzKGNhY2hlS2V5LCB3aGVyZSA9IC5ycy5Xb3JraW5nRGF0YUVudiwgaW5oZXJpdHMgPSBGQUxTRSkgOiBcbiAgaW52YWxpZCBmaXJzdCBhcmd1bWVudFxuRXJyb3IgaW4gYXNzaWduKGNhY2hlS2V5LCBmcmFtZSwgLnJzLkNhY2hlZERhdGFFbnYpIDogXG4gIGF0dGVtcHQgdG8gdXNlIHplcm8tbGVuZ3RoIHZhcmlhYmxlIG5hbWVcbiJ9 -->
-<pre><code>Error in exists(cacheKey, where = .rs.WorkingDataEnv, inherits = FALSE) : 
-  invalid first argument
-Error in assign(cacheKey, frame, .rs.CachedDataEnv) : 
-  attempt to use zero-length variable name</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>The qualtrics_id column contains the unique identifier for each
