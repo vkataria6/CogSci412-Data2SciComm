@@ -202,3 +202,43 @@ billboard %>%
            into = c("year", "month", "day"))
 ```
 
+# ICMA Sept 25 2024 -- Intro to Data Viz & ggplot2
+```{r}
+head(ChickWeight)
+```
+```{r}
+ChickWeight %>%
+  ggplot(aes(x = weight)) + #provide the aesthetic mapping 
+  geom_histogram() #tell ggplot which geometry to use, in this case a histogram
+```
+
+```{r}
+ChickWeight %>%
+  ggplot(aes(y = weight,
+             x = Time,
+             color = Diet,
+             shape = Diet)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(se = FALSE) +
+  theme_minimal() +
+  facet_grid(~Diet) + #faceting by diet groups
+  labs(y = "weight in grams",
+       x = "days since birth",
+       title = "Weight Over Time Across Diets")
+```
+
+```{r}
+ChickWeight %>%
+  ggplot(aes(y = weight,
+             x = Time,
+             color = Diet,
+             shape = Diet)) +
+  geom_boxplot(alpha = 0.5) +
+  geom_smooth(se = FALSE) +
+  theme_minimal() +
+  facet_grid(~Diet) + #faceting by diet groups
+  labs(y = "weight in grams",
+       x = "days since birth",
+       title = "Weight Over Time Across Diets")
+```
+
