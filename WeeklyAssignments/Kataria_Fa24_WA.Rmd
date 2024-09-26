@@ -42,7 +42,7 @@ Report bugs at https://github.com/tidyverse/tidyverse/issues
 --------------------------------------------------------------------------------
 # Assignment 2
 
-```{r Q1}
+```{r}
 library(dplyr)
 getwd()
 match_trials <- read.csv("/Users/vidushikataria/Downloads/CogSci412-Data2SciComm/WeeklyAssignments/tidy_data/MFIndD_analogy.csv")
@@ -50,7 +50,7 @@ match_trials <- read.csv("/Users/vidushikataria/Downloads/CogSci412-Data2SciComm
 
 The qualtrics_id column contains the unique identifier for each participant. 
 
-```{r Q2a}
+```{r}
 glimpse(match_trials)
 ```
 ## 2a: There are 792 rows and 6 columns. I got this information from the output of using the function glimpse()
@@ -64,7 +64,7 @@ people
 
 ## 2b: There are 99 unique people in the dataset, as found by counting distinct qualtrics_id values.
 
-```{r 2c}
+```{r}
 trial_counts <- match_trials %>%
   count(qualtrics_id) %>%
   pull(n) %>%
@@ -78,7 +78,7 @@ trial_counts == 1
 
 # Assignment 3
 
-```{r Q1}
+```{r}
 summary_match_trials <- match_trials %>%
   filter(response_type == "Rel") %>%
   group_by(qualtrics_id) %>%
@@ -86,7 +86,7 @@ summary_match_trials <- match_trials %>%
 ```
 
 
-```{r Q2}
+```{r}
 summary_match_trials %>%
   ggplot(aes(x = relational_match_count)) +
   geom_histogram(bindwidth = 1,
