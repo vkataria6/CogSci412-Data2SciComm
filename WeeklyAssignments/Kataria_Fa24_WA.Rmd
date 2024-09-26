@@ -74,3 +74,50 @@ trial_counts == 1
 ```
 
 ## 2c: Every unique qualtrics_id has data from the same number of trials, as I counted the number of trials per person, extracted the column, and checked if all values are the same.
+-------------------------------------------------------------------------------
+
+# Assignment 3
+
+```{r Q1}
+summary_match_trials <- match_trials %>%
+  filter(response_type == "Rel") %>%
+  group_by(qualtrics_id) %>%
+  summarize(relational_match_count = n())
+```
+
+
+```{r Q2}
+summary_match_trials %>%
+  ggplot(aes(x = relational_match_count)) +
+  geom_histogram(bindwidth = 1,
+                 color = "black") +
+  labs(x = "# of Relational Matches Selected",
+       y = "# of Participants",
+       title = "Relational Matches Selected by Participants")
+```
+A lot of participants selected 8 relational matches, showing a strong preference for relational matches in many cases. However, there is also a small, yet noticeable peak around 2 relational matches. From what I observe, either participants strongly favored relational matches or preferred object matches, with fewer participants showing moderate selections.
+
+
+```{r}
+reshaped_match_trials <- match_trials %>%
+  select(qualtrics_id,
+         trial_number,
+         response_type) %>%
+pivot_wider(names_from = trial_number,
+              values_from = response_type,
+              names_prefix = "trial")
+
+head(reshaped_match_trials)
+```
+
+
+```{r, eval=FALSE } 
+# Error code chunk
+reshaped_match_trials <- match_trials %>%
+  filter(qualtrics_id,
+         trial_number,
+         response_type) %>%
+  pivot_wider(names_from = trial_number,
+              values_from = response_type)
+```
+R told me I used the wrong function as it does not run character vectors. I searched up all the functions in tidyr and dplyr in the help panel to the right to see what other functions I could use for character vectors.
