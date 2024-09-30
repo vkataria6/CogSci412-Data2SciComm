@@ -17,6 +17,9 @@ library(dplyr)
 ```{r}
 de1 <- read_csv("CogSci412_DE1_Data.csv") %>%
   filter(Progress == 100 & Status == "IP Address") %>%
+  mutate(condition = case_when(is.na(FL_39_DO) == FALSE ~ FL_39_DO,
+                               is.na(FL_43_DO) == FALSE ~ FL_43_DO
+                               )) %>%
   select(ResponseId,
          pencil_control = `Pencil Control`, 
          pencil_control_conf = `Conf. Pencil Control`,
@@ -26,14 +29,8 @@ de1 <- read_csv("CogSci412_DE1_Data.csv") %>%
          mag_control_conf = `Conf. Mag. Control`,
          pencil_stnd = Pencil_Standard,
          pencil_stnd_conf = `Conf. Pencil Stand.`,
-         familiarity = Q10,
-         FL_42_DO,
-         FL_39_DO,
-         FL_43_DO) %>%
-  filter(ResponseId != "R_5R9cvvcJ5vFulLe") %>%
-  mutate(condition = case_when(is.na(FL_39_DO) == FALSE ~ FL_39_DO,
-                               is.na(FL_43_DO) == FALSE ~ FL_43_DO
-                               ))
+         familiarity = Q10) %>%
+  filter(ResponseId != "R_5R9cvvcJ5vFulLe")
 
 ```
 
