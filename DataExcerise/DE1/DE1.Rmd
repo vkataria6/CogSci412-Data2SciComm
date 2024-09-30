@@ -1,0 +1,80 @@
+---
+title: "Data Excerise 1: Decision Making"
+author: "Vidushi Kataria"
+date: "`r Sys.Date()`"
+output: html_notebook
+---
+
+This is the notebook for the Data Exercise 1, about decision making. We did a study together in class on Qualtrics, then downloaded the data to analyze. 
+
+# Loading libraries and data
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+
+
+```{r}
+de1 <- read_csv("CogSci412_DE1_Data.csv") %>%
+  filter(Progress == 100 & Status == "IP Address") %>%
+  select(ResponseId,
+         pencil_control = `Pencil Control`, 
+         pencil_control_conf = `Conf. Pencil Control`,
+         mag_stnd = `Magazine Standard`,
+         mag_stnd_conf = `Conf. Mag. Stand.`,
+         mag_control = Magazine_Control,
+         mag_control_conf = `Conf. Mag. Control`,
+         pencil_stnd = Pencil_Standard,
+         pencil_stnd_conf = `Conf. Pencil Stand.`,
+         familiarity = Q10,
+         FL_42_DO,
+         FL_39_DO,
+         FL_43_DO) %>%
+  filter(ResponseId != "R_5R9cvvcJ5vFulLe") %>%
+  mutate(condition = case_when(is.na(FL_39_DO) == FALSE ~ FL_39_DO,
+                               is.na(FL_43_DO) == FALSE ~ FL_43_DO
+                               ))
+
+```
+
+
+```{r}
+de1
+```
+This is in WIDE form.
+
+We want to get it into LONG form
+
+How do we want to structure it?
+
+Each cell (e.g., the number "10" datapoint) can be categorized with three pieces of information. What are they?
+- pencil vs. magazine
+- control vs. standard
+- answer vs. confidence
+
+What we want in long form:
+
+ResponseId: unique identifier for that dataset
+Content: was the question about pencils or magazines 
+Type: was the question a control question or a standard question
+DV ("dependent variable"): answer, confidence 
+
+value: the actual observed number/response 
+
+How do we get the wide form de1 into this desired format? 
+
+```{r}
+de1_long <- de1 %>%
+  pivot_longer(pencil_control:pencil_stnd_conf,
+               names_to = "old_column", 
+               values_to = "value")
+```
+
+
+```{r}
+de1_long %>%
+  filter(is.na(value) == FALSE) %>%
+  separate(into = c("content", "type", "DV"),
+           col = old_column)
+```
+
