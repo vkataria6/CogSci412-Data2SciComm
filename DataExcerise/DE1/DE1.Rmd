@@ -69,9 +69,78 @@ de1_long <- de1 %>%
 
 
 ```{r}
-de1_long %>%
+de1_long_clean <- de1_long %>%
   filter(is.na(value) == FALSE) %>%
+  # check is.na() and is.na() == TRUE WHEN the thing is NA and is == FALSE when the thing is not NA
+  # in this case, we're keeping all things where is.na(value) is NOT NA
+  # therefore, removing the ones where is.na(value) IS NA 
+  
   separate(into = c("content", "type", "DV"),
-           col = old_column)
+           col = old_column) %>%
+  
+  # create new column, replacing the old one!
+  # NA is replaced with "resp"
+  mutate(DV = case_when(is.na(DV) == TRUE ~ "resp",
+                        DV == "conf" ~ DV))
+```
+
+To interpret people's responses:
+
+For the pencil/eraser problem, for the standard the correct answer is 5 cents, but we'd expect lots of folks to say 10 cents. For the control problem, the correct answer is 10 cents.
+
+For the magazine/banana problems, the correct answer for standard is 45 cents, but expect folks to say 90 cents. The correct for control is 90 cents.
+
+## recoding values
+We realized that because people could free-type, some folks included the word "cents" or wrote 0.90 instead of 90 - need to get these all in the same format 
+```{r}
+de1_long_clean %>%
+  filter(DV == "resp") %>%
+  distinct(value)
+```
+
+
+```{r}
+de1_analysis <- de1_long_clean %>%
+  # replace value with the number only stuff - getting rid of the words "cents" and $
+  # notice that the parse_number also converted this column from a CHR vector to a DBL vector
+  # so now it's storing it as a NUMBER than TEXT
+  mutate(value = parse_number(value)) %>%
+  # we still have some issues with 0.90 and 0.05, these only happen when < 1 though
+  mutate(value = case_when(value < 1 ~ value*100, # when it's a decimal number, multiply * 100
+                           value >= 1 ~ value)) %>%  # when it's above one, keep it as is 
+  
+  mutate(correct_answer = case_when(content == "pencil" & type == "stnd" ~ 5,
+                                    content == "pencil" & type == "control" ~ 10,
+                                    content == "mag" & type == "stnd" ~ 45,
+                                    content == "mag" & type == "control" ~ 90),
+         
+         # create a new column for that person's accuracy on that trial
+         # to see how if_else works, when you have one condition and then EVERYTHING ELSE
+         accuracy = case_when(DV == "conf" ~ NA,
+                              value == correct_answer ~ TRUE,
+                              value != correct_answer ~ FALSE)
+  )
+```
+
+
+```{r}
+de1_analysis %>%
+  filter(DV == "resp") %>%
+  group_by(type, accuracy) %>%
+  summarise(n_responses = n()) %>%
+  
+  ggplot(aes(x = type, y = n_responses, fill = accuracy)) +
+  geom_bar(stat = "identity",
+           position = position_dodge(1)) 
+```
+
+```{r}
+de1_analysis %>%
+  filter(DV == "resp"
+         & type == "stnd"
+         & accuracy == FALSE) %>%
+  ggplot(aes(x = as.factor(value))) +
+  geom_bar() +
+  facet_grid(~content)
 ```
 
