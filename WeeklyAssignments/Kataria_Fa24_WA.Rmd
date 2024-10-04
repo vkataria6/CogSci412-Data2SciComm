@@ -121,3 +121,39 @@ reshaped_match_trials <- match_trials %>%
               values_from = response_type)
 ```
 R told me I used the wrong function as it does not run character vectors. I searched up all the functions in tidyr and dplyr in the help panel to the right to see what other functions I could use for character vectors.
+
+-----------------------------------------------------------------------
+# Assignment 4
+```{r}
+scale_data <- read.csv("/Users/vidushikataria/Downloads/CogSci412-Data2SciComm/WeeklyAssignments/tidy_data/MFIndD_REI.csv")
+
+head(scale_data)
+```
+The "response" column is a CHR vector (text) and the "scored_response" column is an INT (numeric) vector. 
+They are different even though they both appear to contain numbers is because there is a difference in how the data is represented. The "response" column most likely contains qualitative responses like "Strongly Agree" or "Agree" etc. So this text is not directly numerical.
+The "scored_response" column contains numeric values because they might have already been converted and stored as a number.
+
+```{r}
+scale_data <- scale_data %>%
+  mutate(numeric_response = recode(response,
+                                   "Strongly Disagree" = 1,
+                                   "Disagree" = 2,
+                                   "Neutral" = 3,
+                                   "Agree" = 4,
+                                   "Strongly Agree" = 5))
+
+head(scale_data)
+```
+```{r}
+scale_data <- scale_data %>%
+  mutate(new_scored_response = if_else(!is.na(rev_scoring),
+                                      6 - numeric_response,
+                                      numeric_response))
+head(scale_data)
+```
+```{r}
+comparison <- scale_data %>%
+  filter(new_scored_response != scored_response)
+```
+
+
