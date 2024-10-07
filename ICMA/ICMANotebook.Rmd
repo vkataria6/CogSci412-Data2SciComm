@@ -242,3 +242,21 @@ ChickWeight %>%
        title = "Weight Over Time Across Diets")
 ```
 
+# ICMA Oct 7 2024
+```{r}
+as.numeric(12)
+```
+
+```{r}
+is.numeric(mean(c(12, 31, 15.57, 4)))
+# prediction = TRUE
+```
+
+```{r}
+((1 + 2) < -1000) | (TRUE & NA)
+```
+```{r}
+(2 + 3 + 9 - 4 == 2 + 6 + as.integer("2.9")) & TRUE | NA
+```
+
+
