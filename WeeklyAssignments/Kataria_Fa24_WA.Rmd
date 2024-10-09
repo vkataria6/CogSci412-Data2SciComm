@@ -45,7 +45,7 @@ Report bugs at https://github.com/tidyverse/tidyverse/issues
 ```{r}
 library(dplyr)
 getwd()
-match_trials <- read.csv("/Users/vidushikataria/Downloads/CogSci412-Data2SciComm/WeeklyAssignments/tidy_data/MFIndD_analogy.csv")
+match_trials <- read_csv("tidy_data/MFIndD_analogy.csv")
 ```
 
 The qualtrics_id column contains the unique identifier for each participant. 
@@ -125,7 +125,7 @@ R told me I used the wrong function as it does not run character vectors. I sear
 -----------------------------------------------------------------------
 # Assignment 4
 ```{r}
-scale_data <- read.csv("/Users/vidushikataria/Downloads/CogSci412-Data2SciComm/WeeklyAssignments/tidy_data/MFIndD_REI.csv")
+scale_data <- read_csv("tidy_data/MFIndD_REI.csv")
 
 head(scale_data)
 ```
@@ -135,7 +135,7 @@ The "scored_response" column contains numeric values because they might have alr
 
 ```{r}
 scale_data <- scale_data %>%
-  mutate(numeric_response = recode(response,
+  mutate(numeric_response = recode(response, 
                                    "Strongly Disagree" = 1,
                                    "Disagree" = 2,
                                    "Neutral" = 3,
