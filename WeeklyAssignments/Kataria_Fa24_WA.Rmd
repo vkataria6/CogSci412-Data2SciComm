@@ -74,15 +74,16 @@ trial_counts == 1
 ```
 
 ## 2c: Every unique qualtrics_id has data from the same number of trials, as I counted the number of trials per person, extracted the column, and checked if all values are the same.
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------
 
 # Assignment 3
 
 ```{r}
 summary_match_trials <- match_trials %>%
-  filter(response_type == "Rel") %>%
   group_by(qualtrics_id) %>%
-  summarize(relational_match_count = n())
+  summarize(relational_match_count = sum(response_type == "Rel"))
+
+head(summary_match_trials)
 ```
 
 
@@ -90,7 +91,7 @@ summary_match_trials <- match_trials %>%
 summary_match_trials %>%
   ggplot(aes(x = relational_match_count)) +
   geom_histogram(bindwidth = 1,
-                 color = "black") +
+                 color = "black", fill = "lightblue") +
   labs(x = "# of Relational Matches Selected",
        y = "# of Participants",
        title = "Relational Matches Selected by Participants")
@@ -105,7 +106,8 @@ reshaped_match_trials <- match_trials %>%
          response_type) %>%
 pivot_wider(names_from = trial_number,
               values_from = response_type,
-              names_prefix = "trial")
+              names_prefix = "trial") %>%
+  drop_na
 
 head(reshaped_match_trials)
 ```
@@ -122,7 +124,7 @@ reshaped_match_trials <- match_trials %>%
 ```
 R told me I used the wrong function as it does not run character vectors. I searched up all the functions in tidyr and dplyr in the help panel to the right to see what other functions I could use for character vectors.
 
------------------------------------------------------------------------
+----------------------------------------------------------------------
 # Assignment 4
 ```{r}
 scale_data <- read_csv("tidy_data/MFIndD_REI.csv")
@@ -135,25 +137,39 @@ The "scored_response" column contains numeric values because they might have alr
 
 ```{r}
 scale_data <- scale_data %>%
-  mutate(numeric_response = recode(response, 
-                                   "Strongly Disagree" = 1,
-                                   "Disagree" = 2,
-                                   "Neutral" = 3,
-                                   "Agree" = 4,
-                                   "Strongly Agree" = 5))
+  mutate(numeric_response = case_when(
+    response == "Strongly Disagree" ~ 1,
+    response == "Disagree" ~ 2,
+    response == "Neutral" ~ 3,
+    response == "Agree" ~ 4,
+    response == "Strongly Agree" ~ 5,
+    !is.na(as.numeric(response)) ~ as.numeric(response),
+    TRUE ~ NA_real_
+  ))
 
 head(scale_data)
 ```
+
+
 ```{r}
 scale_data <- scale_data %>%
-  mutate(new_scored_response = if_else(!is.na(rev_scoring),
-                                      6 - numeric_response,
-                                      numeric_response))
+  mutate(new_scored_response = case_when(
+    !is.na(rev_scoring) & !is.na(numeric_response) ~ 6 - numeric_response,
+    is.na(rev_scoring) & !is.na(numeric_response) ~ numeric_response,
+    TRUE ~ NA_real_
+  ))
+
 head(scale_data)
 ```
+
+
 ```{r}
 comparison <- scale_data %>%
-  filter(new_scored_response != scored_response)
+  filter(!is.na(new_scored_response) & !is.na(scored_response)) %>%
+  mutate(matches = new_scored_response == scored_response) %>%
+  filter(!matches)
+
+head(comparison)
 ```
 
 
