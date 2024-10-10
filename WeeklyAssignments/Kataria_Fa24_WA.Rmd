@@ -158,6 +158,7 @@ scale_data <- scale_data %>%
                                       numeric_response))
 head(scale_data)
 ```
+
 ```{r}
 comparison <- scale_data %>%
   filter(new_scored_response != scored_response)
