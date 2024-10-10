@@ -139,15 +139,16 @@ The "scored_response" column contains numeric values because they might have alr
 scale_data <- scale_data %>%
   mutate(numeric_response = case_when(
     response == "Strongly Disagree" ~ 1,
-    response == "Disagree" ~ 2,
-    response == "Neutral" ~ 3,
-    response == "Agree" ~ 4,
     response == "Strongly Agree" ~ 5,
     !is.na(as.numeric(response)) ~ as.numeric(response),
     TRUE ~ NA_real_
   ))
 
 head(scale_data)
+```
+```{r}
+scale_data %>%
+  distinct(response)
 ```
 
 
@@ -161,7 +162,7 @@ head(scale_data)
 
 ```{r}
 comparison <- scale_data %>%
-  filter(new_scored_response != scored_response)
+  filter(new_scored_response != scored_response) 
 
 print(comparison)
 ```
