@@ -124,7 +124,7 @@ reshaped_match_trials <- match_trials %>%
 ```
 R told me I used the wrong function as it does not run character vectors. I searched up all the functions in tidyr and dplyr in the help panel to the right to see what other functions I could use for character vectors.
 
-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 # Assignment 4
 ```{r}
 scale_data <- read_csv("tidy_data/MFIndD_REI.csv")
@@ -153,23 +153,16 @@ head(scale_data)
 
 ```{r}
 scale_data <- scale_data %>%
-  mutate(new_scored_response = case_when(
-    !is.na(rev_scoring) & !is.na(numeric_response) ~ 6 - numeric_response,
-    is.na(rev_scoring) & !is.na(numeric_response) ~ numeric_response,
-    TRUE ~ NA_real_
-  ))
-
+  mutate(new_scored_response = if_else(!is.na(rev_scoring),
+                                      6 - numeric_response,
+                                      numeric_response))
 head(scale_data)
 ```
-
-
 ```{r}
 comparison <- scale_data %>%
-  filter(!is.na(new_scored_response) & !is.na(scored_response)) %>%
-  mutate(matches = new_scored_response == scored_response) %>%
-  filter(!matches)
+  filter(new_scored_response != scored_response)
 
-head(comparison)
+print(comparison)
 ```
 
 
