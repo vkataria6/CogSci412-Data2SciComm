@@ -127,16 +127,16 @@ R told me I used the wrong function as it does not run character vectors. I sear
 -----------------------------------------------------------------------
 # Assignment 4
 ```{r}
-scale_data <- read_csv("tidy_data/MFIndD_REI.csv")
+rei_data <- read_csv("tidy_data/MFIndD_REI.csv")
 
-head(scale_data)
+head(rei_data)
 ```
 The "response" column is a CHR vector (text) and the "scored_response" column is an INT (numeric) vector. 
 They are different even though they both appear to contain numbers is because there is a difference in how the data is represented. The "response" column most likely contains qualitative responses like "Strongly Agree" or "Agree" etc. So this text is not directly numerical.
 The "scored_response" column contains numeric values because they might have already been converted and stored as a number.
 
 ```{r}
-scale_data <- scale_data %>%
+rei_data <- rei_data %>%
   mutate(numeric_response = case_when(
     response == "Strongly Disagree" ~ 1,
     response == "Strongly Agree" ~ 5,
@@ -144,27 +144,71 @@ scale_data <- scale_data %>%
     TRUE ~ NA_real_
   ))
 
-head(scale_data)
+head(rei_data)
 ```
 ```{r}
-scale_data %>%
+rei_data %>%
   distinct(response)
 ```
 
 
 ```{r}
-scale_data <- scale_data %>%
+rei_data <- rei_data %>%
   mutate(new_scored_response = if_else(!is.na(rev_scoring),
                                       6 - numeric_response,
                                       numeric_response))
-head(scale_data)
+head(rei_data)
 ```
 
 ```{r}
-comparison <- scale_data %>%
+comparison <- rei_data %>%
   filter(new_scored_response != scored_response) 
 
 print(comparison)
 ```
+-----------------------------------------------------------
+
+# Assignment 5
+
+```{r}
+rei_data <- rei_data %>%
+  mutate(new_scored_response = ifelse(rev_scoring == "neg", 6 - new_scored_response, new_scored_response))
+
+rei_summary <- rei_data %>%
+  group_by(qualtrics_id, sub_type) %>%
+  summarize(score = sum(new_scored_response, na.rm = TRUE), .groups = 'drop')
+
+print(rei_summary)
+```
 
 
+```{r}
+rei_na_scores <- rei_summary %>%
+  filter(is.na(score))
+
+print(rei_na_scores)
+```
+This code filters out any rows with missing values in the score column, which helps with identifying which participants have missing data.
+
+
+```{r}
+combined_summary <- rei_summary %>%
+  left_join(summary_match_trials, by = "qualtrics_id")
+
+print(combined_summary)
+```
+
+```{r}
+
+ggplot(combined_summary, aes(x = score, y = relational_match_count, color = sub_type)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(x = "REI Score", 
+       y = "Analogy Score",
+       title = "REI vs. Analogy Scores by Sub-Type") +
+  theme_minimal() +
+  theme(axis.title.x = element_text(color = "blue", size = 12),
+        axis.title.y = element_text(color = "blue", size = 12))
+```
+This plot shows a pretty weak relationship between REI scores and Analogy scores across the four sub-types (EA, EE, RA, RE).
+There is a slight positive trend for EA, but the other sub-types show slightly negative trends. There is a lot of noise in the plot which suggests that REI scores do not strongly predict the Analogy score performance.
