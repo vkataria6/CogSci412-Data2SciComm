@@ -199,7 +199,6 @@ print(combined_summary)
 ```
 
 ```{r}
-
 ggplot(combined_summary, aes(x = score, y = relational_match_count, color = sub_type)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) + 
