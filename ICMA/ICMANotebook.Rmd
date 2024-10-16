@@ -306,4 +306,72 @@ left_join(age_data, gender_data)
 inner_join(age_data, gender_data)
 ```
 
+# ICMA Oct 16 2024
+
+```{r}
+mean(c(1, 2, 3))
+```
+
+```{r}
+(1 + 2 + 3)/3
+```
+
+```{r}
+vec <- c(1, 2, 3)
+```
+
+
+```{r}
+(vec[1] + vec[2] + vec[3])/length(vec)
+```
+
+```{r}
+fave_number <- tribble(~name, ~number,
+                       "MC", 8,
+                       "AP", 9,
+                       "NG", 12,
+                       "VE", 6,
+                       "AL", 17,
+                       "AR", 3,
+                       "MC", 7,
+                       "RK", 8,
+                       "AC", 4,
+                       "SC", 21,
+                       "KK", 16,
+                       "RK", 28,
+                       "VK", 17,
+                       "MH", 12
+                       )
+```
+
+
+```{r}
+for (i in fave_number) {
+  print(i)
+}
+```
+
+
+```{r}
+for (i in fave_number$number) {
+  print(i)
+}
+```
+How are fave_number["number"] and fave_number$number different?
+
+```{r}
+typeof(fave_number["number"])
+typeof(fave_number$number)
+```
+
+```{r}
+for (i in fave_number[["number"]]) {
+  print(i)
+}
+```
+```{r}
+for (i in seq_along(fave_number$name)) {
+  print(str_c(fave_number$name[i], "'s favorite number is ", fave_number$number[i]))
+}
+```
 
