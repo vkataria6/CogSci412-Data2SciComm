@@ -4,6 +4,7 @@ date: "2024-9-10"
 author: "Vidushi Kataria"
 output: html_notebook
 ---
+
 # Initial Heading
 ```{r}
 library(tidyverse)
@@ -39,9 +40,8 @@ https://tidyverse.tidyverse.org
 https://github.com/tidyverse/tidyverse
 
 Report bugs at https://github.com/tidyverse/tidyverse/issues
---------------------------------------------------------------------------------
-# Assignment 2
 
+# Assignment 2
 ```{r}
 library(dplyr)
 getwd()
@@ -53,7 +53,7 @@ The qualtrics_id column contains the unique identifier for each participant.
 ```{r}
 glimpse(match_trials)
 ```
-## 2a: There are 792 rows and 6 columns. I got this information from the output of using the function glimpse()
+There are 792 rows and 6 columns. I got this information from the output of using the function glimpse()
 
 ```{r}
 people <- match_trials %>%
@@ -62,7 +62,7 @@ people <- match_trials %>%
 people
 ```
 
-## 2b: There are 99 unique people in the dataset, as found by counting distinct qualtrics_id values.
+2b: There are 99 unique people in the dataset, as found by counting distinct qualtrics_id values.
 
 ```{r}
 trial_counts <- match_trials %>%
@@ -73,11 +73,10 @@ trial_counts <- match_trials %>%
 trial_counts == 1
 ```
 
-## 2c: Every unique qualtrics_id has data from the same number of trials, as I counted the number of trials per person, extracted the column, and checked if all values are the same.
---------------------------------------------------------------------------
+2c: Every unique qualtrics_id has data from the same number of trials, as I counted the number of trials per person, extracted the column, and checked if all values are the same.
+
 
 # Assignment 3
-
 ```{r}
 summary_match_trials <- match_trials %>%
   group_by(qualtrics_id) %>%
@@ -124,7 +123,7 @@ reshaped_match_trials <- match_trials %>%
 ```
 R told me I used the wrong function as it does not run character vectors. I searched up all the functions in tidyr and dplyr in the help panel to the right to see what other functions I could use for character vectors.
 
------------------------------------------------------------------------
+
 # Assignment 4
 ```{r}
 rei_data <- read_csv("tidy_data/MFIndD_REI.csv")
@@ -166,10 +165,9 @@ comparison <- rei_data %>%
 
 print(comparison)
 ```
------------------------------------------------------------
+
 
 # Assignment 5
-
 ```{r}
 rei_data <- rei_data %>%
   mutate(new_scored_response = ifelse(rev_scoring == "neg", 6 - new_scored_response, new_scored_response))
@@ -211,3 +209,51 @@ ggplot(combined_summary, aes(x = score, y = relational_match_count, color = sub_
 ```
 This plot shows a pretty weak relationship between REI scores and Analogy scores across the four sub-types (EA, EE, RA, RE).
 There is a slight positive trend for EA, but the other sub-types show slightly negative trends. There is a lot of noise in the plot which suggests that REI scores do not strongly predict the Analogy score performance.
+
+
+# Assignment 6
+```{r}
+probtask <- read_csv("tidy_data/MFIndD_probtask.csv")
+```
+```{r}
+condition <- unique(probtask$condition)
+print(condition)
+```
+
+```{r}
+mean_rt <- numeric(length(condition))
+```
+
+
+```{r}
+for (i in seq_along(condition)) {
+  mean_rt[i] <- mean(probtask$rt[probtask$condition], na.rm = TRUE)
+}
+```
+
+
+```{r}
+# table w/ across()
+
+?across()
+
+mean_rt_table <- probtask %>%
+  group_by(condition) %>%
+  summarise(
+    across(c(rt, correct), ~ mean(.x, na.rm = TRUE),
+           .names = "mean_{.col}")
+  )
+mean_rt_table
+```
+
+```{r}
+# table w/o across()
+mean_rt_table_2 <- probtask %>%
+  group_by(condition) %>%
+  summarise(
+    mean_rt = mean(rt, na.rm = TRUE),
+    accuracy = mean(correct, na.rm = TRUE)
+  )
+mean_rt_table_2
+```
+
