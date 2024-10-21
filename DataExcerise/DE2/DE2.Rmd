@@ -1,0 +1,79 @@
+---
+title: "Data Exercise 2: Mice Jumping (Parker)"
+author: Vidushi Kataria
+date: "`r Sys.Date()`" 
+output: html_notebook
+---
+
+# Libraries
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+files <- list.files(path = "jumping_data_parker/",
+                         pattern = "*.csv",
+                         full.names = TRUE)
+
+files
+```
+
+
+```{r}
+convert_columns <- function(file) {
+  file <- file %>%
+    mutate(sex = case_when(sex == FALSE ~ "F",
+                         sex == "M" ~ "M"),
+           date = as.character(date))
+}
+```
+
+
+```{r}
+raw_data <- map(files, read_csv) %>%
+  map(convert_columns) %>%
+  bind_rows()
+```
+
+
+# inspect data
+```{r}
+raw_data %>%
+  distinct(sex)
+```
+```{r}
+raw_data %>%
+  distinct(condition)
+```
+```{r}
+raw_data %>%
+  distinct(laser_trial)
+```
+
+# explore the data
+```{r}
+summary_data <- raw_data %>%
+  group_by(subject, distance) %>%
+  summarise(succ_rate = sum(outcome == 1)/n())
+```
+
+
+# plot the data
+Replicating the figure in the paper (ish)
+```{r}
+summary_data %>%
+  ggplot(aes(x = succ_rate)) +
+  geom_histogram()
+```
+
+```{r}
+raw_data %>%
+  group_by(subject, distance) %>%
+  filter(outcome == 1 | outcome == 0)
+  mutate(succ_rate_NOabort =)
+```
+
+
+

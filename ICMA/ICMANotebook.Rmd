@@ -374,4 +374,6 @@ for (i in seq_along(fave_number$name)) {
   print(str_c(fave_number$name[i], "'s favorite number is ", fave_number$number[i]))
 }
 ```
+# ICMA Oct 21 2024
+
 
