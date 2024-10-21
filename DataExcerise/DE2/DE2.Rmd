@@ -60,20 +60,41 @@ summary_data <- raw_data %>%
 ```
 
 
-# plot the data
-Replicating the figure in the paper (ish)
 ```{r}
 summary_data %>%
   ggplot(aes(x = succ_rate)) +
   geom_histogram()
 ```
 
+# plot the data
+
+```{r}
+summary_data %>%
+  ggplot(aes(x = distance,
+             y = succ_rate,
+             group = subject)) +
+  geom_line() +
+  ylim(0, 1)
+```
+
 ```{r}
 raw_data %>%
   group_by(subject, distance) %>%
-  filter(outcome == 1 | outcome == 0)
-  mutate(succ_rate_NOabort =)
+  mutate(succ_rate_NOabort = sum(outcome == 1)/(n() - sum(outcome == 2)))
 ```
 
+```{r}
+raw_data %>%
+  group_by(subject, distance) %>%
+# filter(outcome == 1 | outcome == 0)
+# filter(outcome != 2) 
+  filter(outcome %in% c(0, 1)) %>%
+  summarise(succ_rate = sum(outcome == 1)/n()) %>%
+  ggplot(aes(x = distance,
+             y = succ_rate,
+             group = subject)) +
+  geom_line() +
+  ylim(0, 1)
+```
 
 
