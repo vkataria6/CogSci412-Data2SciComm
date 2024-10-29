@@ -8,6 +8,8 @@ output: html_notebook
 # Initial Heading
 ```{r}
 library(tidyverse)
+install.packages("ggdist")
+library(ggdist)
 ```
 # Week 1
 Due to my previous programming experience and coursework using R, I knew to use library() to load the tidyverse package.
@@ -215,10 +217,13 @@ There is a slight positive trend for EA, but the other sub-types show slightly n
 ```{r}
 probtask <- read_csv("tidy_data/MFIndD_probtask.csv")
 ```
+
+
 ```{r}
 condition <- unique(probtask$condition)
 print(condition)
 ```
+
 
 ```{r}
 mean_rt <- numeric(length(condition))
@@ -246,6 +251,7 @@ mean_rt_table <- probtask %>%
 mean_rt_table
 ```
 
+
 ```{r}
 # table w/o across()
 mean_rt_table_2 <- probtask %>%
@@ -256,4 +262,62 @@ mean_rt_table_2 <- probtask %>%
   )
 mean_rt_table_2
 ```
+
+
+# Assignment 7
+
+```{r}
+probtask %>%
+  group_by(condition) %>%
+  summarise(across(c(rt, correct), mean)) %>%
+  pivot_longer(c(rt, correct)) %>%
+  ggplot(aes(y = value, x = condition)) +
+  geom_point(color = "red") +
+  facet_wrap(~name, scales = "free")
+```
+1a: From this plot, we can see that the stacked blob format was the most accurate (~0.69), while separated formats performed around ~0.62. Speed wise, separated blobs were fastest (~892 ms), while separated dots were slowest (~847 ms). Based on these observations, we can conclude that the stacked format produced the highest accuracy, while the separated blobs (less accurate) allowed for faster decisions.  
+
+1b: I first noticed the contrasting patterns between accuracy and speed across different visualization types. It seems like the shape of the dots from the left plot are the inverse of the right plot. It could reveal that there might be some trade-off between accuracy and speed. 
+
+1c: Off the bat, I noticed that the visualization type names overlap each other. This would require using a function to rotate or tilt the x-axis labels like theme() and axis.text.x
+I also think there should be unit measures for reaction time and accuracy to help the data be portrayed clearer.
+Additionally, it is unclear the specific sample population we are targeting. Are there specific proportion differences that were harder to judge in certain formats? 
+
+
+```{r}
+accuracy_sum <- probtask %>%
+  group_by(SubID, condition) %>%
+  summarise(prop_corr = mean(correct, na.rm = TRUE)) %>%
+  group_by(condition) %>%
+  summarise(mean_prop_corr = mean(prop_corr, na.rm = TRUE))
+
+accuracy_sum
+```
+
+
+```{r}
+accuracy_plot <- accuracy_sum %>%
+  ggplot(aes(x = condition, y = mean_prop_corr)) +
+  geom_point(color = "blue") +
+  labs(title = "Mean Proportion of Correct Responses by Condition",
+       x = "Condition", y = "Mean Proportion Correct")
+
+accuracy_plot
+```
+This plot provides a clearer view of accuracy differences across conditions. It is also a single-focused visualization so it can help the viewer focus on one key measure at a time (in this case just the accuracy data). This plot looks visually less confusing and avoids different scales and metrics to convey the message better.
+
+```{r}
+dist_plot <- accuracy_sum %>%
+  ggplot(aes(x = condition, y = mean_prop_corr)) +
+  stat_dotsinterval(aes(y = mean_prop_corr), 
+                    color = "darkblue", # consistent color for interval points
+                    slab_fill = "lightblue", # show soft contrast in slab,
+                    dotsize = 0.6) + # adjusting dot size 
+  labs(title = "Proportion Correct Responses w/ Distributional Info.",
+       x = "Condition", y = "Mean Proportion Correct") 
+
+dist_plot
+```
+The distributional plot provides additional information about the variability of responses for each condition. The circle size can also help the viewer visualize the sample size of each condition. In this case, all the sample sizes across the four conditions look visually equal. 
+
 
