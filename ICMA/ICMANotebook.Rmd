@@ -1,8 +1,17 @@
 ---
 title: "ICMA D2SC Notebook"
-output: html_notebook
-author: Vidushi Kataria
+author: "Vidushi Kataria"
 date: "`r Sys.Date()`"
+output:
+  word_document:
+    toc: yes
+  pdf_document: default
+  html_document:
+    toc: yes
+    toc_float:
+      collapsed: no
+      toc_depth: 2
+    df_print: paged
 ---
 # ICMA Sept 9 2024
 
@@ -33,7 +42,6 @@ my_vector <- c(2,3,4)
 mean(my_vector)
 ```
 
-# Make sure that code chunks run smoothly from top to bottom. Order of chunks matter. 
 
 ```{r}
 help(sd)
@@ -42,7 +50,7 @@ sd(1:2) ^ 2
 
 # ICMA Sept 16 2024
 
-```{r}
+```{r load-libraries, echo = FALSE, message = FALSE}
 library(tidyverse)
 ```
 
@@ -202,7 +210,7 @@ billboard %>%
            into = c("year", "month", "day"))
 ```
 
-# ICMA Sept 25 2024 -- Intro to Data Viz & ggplot2
+# ICMA Sept 25 2024 
 ```{r}
 head(ChickWeight)
 ```
@@ -374,6 +382,22 @@ for (i in seq_along(fave_number$name)) {
   print(str_c(fave_number$name[i], "'s favorite number is ", fave_number$number[i]))
 }
 ```
-# ICMA Oct 21 2024
+# ICMA Oct 30 2024
 
+Let's write a sentence that has **bold** and *italics*!
+
+Part 2: create a variable, then write a sentence that uses that variable, bold, and italics
+
+```{r}
+name <- "Vidushi"
+```
+
+My name is `r name` and I really hate it when people use both **bold** and *italics* in the same sentence.
+
+
+```{r chick-plot, fig.cap="Chick weight across time"}
+ChickWeight %>%
+  ggplot(aes(y = weight, x = Time, group = Chick)) +
+  geom_line()
+```
 
