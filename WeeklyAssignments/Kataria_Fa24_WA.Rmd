@@ -1,17 +1,23 @@
 ---
-title: "D2SC: Weekly Assignments"
-date: "2024-9-10"
+title: 'D2SC: Weekly Assignments'
 author: "Vidushi Kataria"
-output: html_notebook
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: yes
+    df_print: paged
+  html_notebook:
+    toc: yes
+    toc_float: yes
 ---
 
 # Initial Heading
 ```{r}
 library(tidyverse)
-install.packages("ggdist")
 library(ggdist)
 ```
-# Week 1
+
+# Assignment 1
 Due to my previous programming experience and coursework using R, I knew to use library() to load the tidyverse package.
 
 I did refer to this website, as it gave me a concise description between each function within tidyverse: https://www.tidyverse.org/packages/ 
@@ -320,4 +326,41 @@ dist_plot
 ```
 The distributional plot provides additional information about the variability of responses for each condition. The circle size can also help the viewer visualize the sample size of each condition. In this case, all the sample sizes across the four conditions look visually equal. 
 
+# Assignment 8
 
+Q1: Added floating toc at the top of notebook
+
+```{r}
+summary_probtask <- probtask %>%
+  group_by(SubID, condition) %>%
+  summarise(
+    rt = mean(rt, na.rm = TRUE),
+    correct = mean(correct, na.rm = TRUE)) %>%
+  ungroup()
+
+head(summary_probtask)
+```
+
+```{r}
+ggplot(summary_probtask, aes(x = rt, y = correct, color = condition)) +
+  geom_point() +
+  labs(
+    title = "Reaction Time vs Accuracy by Condition",
+    x = "Reaction Time (ms)", 
+    y = "Proportion Correct") +
+  theme_minimal()
+```
+
+
+```{r}
+ggplot(summary_probtask, aes(x = rt, y = correct, color = condition)) +
+  geom_point() +
+  facet_wrap(~condition) +
+  labs(
+    title = "Reaction Time vs Accuracy by Condition",
+    x = "Reaction Time (ms)", 
+    y = "Proportion Correct") +
+  theme_minimal()
+```
+
+**_Observation:_** According to these plots, reaction time tends to have an overall **positive** correlation. As reaction time *increases*, the proportion correct appears to *rise.* (However, there is some variability with *blob_stacked* and *dots_EqSizeSep*).
