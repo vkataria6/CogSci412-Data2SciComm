@@ -36,7 +36,7 @@ prob_data_mod <- probtask %>%
 ```
 
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 plot_data <- prob_data_mod %>%
   mutate(response = as.numeric(response)) %>%
   group_by(SubID, condition, num_congruent) %>%
@@ -45,7 +45,7 @@ plot_data <- prob_data_mod %>%
 
 
 ```{r}
-ggplot(plot_data, aes(x = condition, y = proportion_correct,
+plot <- ggplot(plot_data, aes(x = condition, y = proportion_correct,
                       color = num_congruent)) +
   stat_halfeye() +
   labs(
@@ -56,4 +56,17 @@ ggplot(plot_data, aes(x = condition, y = proportion_correct,
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
   
 ```
+
+## Research Question
+- How do people think proportionally with different kinds of stimuli?
+
+## Fork Question
+- How does numerator congruence affect people's accuracy in judgement across different kinds of stimuli?
+
+## Plot
+```{r}
+print(plot)
+```
+
+
 
