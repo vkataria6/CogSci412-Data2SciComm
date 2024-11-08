@@ -1,0 +1,59 @@
+---
+title: "Kataria_WA9"
+author: "Vidushi Kataria"
+date: "`r Sys.Date()`"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(ggdist)
+probtask <- read_csv("data/MFIndD_probtask.csv")
+```
+
+
+```{r dataprep}
+prob_data_mod <- probtask %>%
+  separate(left_stim, into = c("left_numerator", "left_other"), sep = "_",
+           convert = TRUE) %>%
+  separate(right_stim, into = c("right_numerator", "right_other"), sep = "_",
+           convert = TRUE) %>%
+  mutate(
+    left_proportion_value = left_numerator / (left_numerator + left_other),
+    right_proportion_value = right_numerator / (right_numerator + right_other)) %>%
+  mutate(
+    larger_numerator = case_when(left_numerator > right_numerator ~ "left",
+                                 TRUE ~ "right")) %>%
+  mutate(
+    larger_proportion = case_when(
+      left_proportion_value > right_proportion_value ~ "left",
+      TRUE ~ "right")) %>%
+  mutate(
+    num_congruent = case_when(
+      larger_numerator == larger_proportion ~ TRUE,
+      TRUE ~ FALSE))
+```
+
+
+```{r}
+plot_data <- prob_data_mod %>%
+  mutate(response = as.numeric(response)) %>%
+  group_by(SubID, condition, num_congruent) %>%
+  summarize(proportion_correct = mean(right_proportion_value + left_proportion_value, na.rm = TRUE), .groups = "drop")
+```
+
+
+```{r}
+ggplot(plot_data, aes(x = condition, y = proportion_correct,
+                      color = num_congruent)) +
+  stat_halfeye() +
+  labs(
+    x = "Condition",
+    y = "Proportion Correct",
+    color = "Numerator Congruency") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+```
+
