@@ -1,0 +1,101 @@
+---
+title: "Coolest paper ever!"
+author:
+- name: Vidushi Kataria
+  affiliation: '1'
+  corresponding: no
+  email: vk412@scarletmail.rutgers.edu
+  role:
+  - Conceptualization
+  - "Writing - Original Draft Preparation"
+  - "Writing - Review & Editing"
+
+affiliation:
+  - id : "1"
+  - institution : "Rutgers University"
+  
+shorttitle: Title
+output:
+  papaja::apa6_docx: default
+  
+authornote: |
+  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
+  Enter author note here.
+abstract: "One or two sentences providing a **basic introduction** to the field,  comprehensible
+  to a scientist in any discipline.\nTwo to three sentences of **more detailed background**,
+  comprehensible  to scientists in related disciplines.\nOne sentence clearly stating
+  the **general problem** being addressed by  this particular study.\nOne sentence
+  summarizing the main result (with the words \"**here we show**\" or their equivalent).\nTwo
+  or three sentences explaining what the **main result** reveals in direct comparison
+  to what was thought to be the case previously, or how the  main result adds to previous
+  knowledge.\nOne or two sentences to put the results into a more **general context**.\nTwo
+  or three sentences to provide a **broader perspective**, readily comprehensible
+  to a scientist in any discipline.\n\n<!-- https://tinyurl.com/ybremelq -->\n"
+keywords: keywords
+wordcount: X
+bibliography: "r-references.bib"
+floatsintext: no
+linenumbers: yes
+draft: no
+mask: no
+figurelist: no
+tablelist: no
+footnotelist: no
+classoption: man
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+library(tidyverse)
+r_refs("r-references.bib")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+
+
+# Methods
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+
+# Results
+
+
+(ref:chick-caption) Each chick was weighed every other day from birth to day 20 and on day 21. This plot shows the weight of each chick (y-axis) for each day they were measured (x-axis). Each point is one measurement.
+```{r chick-plot, fig.cap="(ref:chick-caption)"}
+ChickWeight %>%
+  ggplot(aes(y = weight, x = Time)) +
+  geom_point()
+```
+
+
+```{r chick-plot-red, fig.cap="This is my red chick weight"}
+ChickWeight %>%
+  ggplot(aes(y = weight, x = Time)) +
+  geom_point(color = "red")
+```
+
+
+
+# Discussion
+
+
+\newpage
+
+# References
+
+::: {#refs custom-style="Bibliography"}
+:::
