@@ -1,0 +1,93 @@
+---
+title: "Data Exercise 3"
+author: "Vidushi Kataria"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(ggdist)
+```
+
+```{r}
+desc <- read_csv("data/desc_all.csv") 
+e2_error <- read_csv("data/e2_error_df.csv")
+e5_error <- read_csv("data/e5_error_df.csv")
+e15_error <- read_csv("data/e15_error_df.csv")
+```
+## Descriptives
+This is the data that tells us how many groups each participant made and the language background of that participant. This is the data we need for that first box plot.
+
+```{r}
+desc %>%
+  distinct(Code, group_name)
+```
+```{r}
+desc %>%
+  ggplot(aes(y = no_categories)) +
+  geom_histogram(binwidth = 1,
+                 color = "white")
+```
+
+```{r}
+desc %>%
+  ggplot(aes(y = no_categories)) +
+  geom_histogram() +
+  facet_grid(~group_name)
+```
+We noticed that there’s an NA - let’s make sure that’s “missing” and not the letters “NA”
+
+```{r}
+desc %>%
+  distinct(group_name)
+```
+We also noticed that there seems to be a larger sample (i.e., more overall counts) for the engligh mono and non-asian multi groups. Let’s see if that’s true/what the sample sizes are
+
+```{r}
+desc %>%
+  count(group_name)
+```
+## Plot number 1
+```{r}
+grouped_cat_desc <- desc %>%
+  group_by(group_name) %>%
+  summarise(mean = mean(no_categories),
+            sd = sd(no_categories)) %>%
+  mutate(mean_sd = str_c(round(mean, 2), " (", round(sd, 2), ")"))
+```
+
+
+```{r}
+desc %>%
+  filter(is.na(group_name) == FALSE) %>%
+  mutate(full_group_name = case_when(group_name == "south_asian" ~ "South Asian",
+                                     group_name == "se_asian" ~ "Southeast Asian",
+                                     group_name == "non_asian_multi" ~ "Non-Asian Multilingual",
+                                     group_name == "eng_mono" ~ "English monolingual diverse",
+                                     group_name == "east_asian" ~ "East Asian"),
+         full_group_name = factor(full_group_name, 
+                                  levels = c("English monolingual diverse",
+                                             "Non-Asian Multilingual",
+                                             "South Asian",
+                                             "Southeast Asian",
+                                             "East Asian"))) %>%
+  ggplot(aes(y = fct_rev(full_group_name),
+             x = no_categories,
+             fill = fct_rev(full_group_name))) +
+  geom_boxplot(color = "black",
+               outliers = FALSE,
+               alpha = 0.8) +
+  xlim(0, 20) +
+  labs(x = "Number of Categories",
+       y = "Group Name",
+       title = "Average Number of Categories Created per group") +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  scale_fill_viridis_d(option = "plasma") +
+  annotate(geom = "text", y = 1, x = 17.5, label = filter(grouped_cat_desc, group_name == "east_asian")$mean_sd) +
+  annotate(geom = "text", y = 2, x = 17.5, label = filter(grouped_cat_desc, group_name == "se_asian")$mean_sd) +
+  annotate(geom = "text", y = 3, x = 17.5, label = filter(grouped_cat_desc, group_name == "south_asian")$mean_sd) +
+  annotate(geom = "text", y = 4, x = 17.5, label = filter(grouped_cat_desc, group_name == "non_asian_multi")$mean_sd) +
+  annotate(geom = "text", y = 5, x = 17.5, label = filter(grouped_cat_desc, group_name == "eng_mono")$mean_sd)
+```
+
