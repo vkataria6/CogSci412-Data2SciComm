@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Explore Shiny"
 author: "Vidushi Kataria"
 date: "`r Sys.Date()`"
 output: html_document
