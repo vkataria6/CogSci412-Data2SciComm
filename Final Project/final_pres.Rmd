@@ -1,0 +1,32 @@
+---
+title: "Reward Sensitivity and Working Memory Performance in ADHD"
+author: "Vidushi Kataria"
+date: '`r Sys.Date()`'
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+
+## Research Objective
+- How do working memory and reward processing differ between children diagnosed with ADHD and neurotypical children, and what implications do these differences have for cognitive development?
+
+## Little Research Question
+
+- Do children with ADHD show distinct activation patterns in the prefrontal cortex during n-back tasks compared to neurotypical children?
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
